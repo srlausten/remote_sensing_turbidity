@@ -1,0 +1,215 @@
+---
+title: "EI PROJECT DATA"
+author: "Sam Lausten"
+date: "11/3/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+
+'EI Project code'
+
+install.packages('lubridate')
+install.packages('tidyverse')
+
+library(lubridate)
+library(tidyverse)
+
+#load csv's into Rstudio
+#get overall avg of sensors, remove 0s/NAS
+
+#Figs - Boxplots, line, DateTime vs 3 sensors
+
+
+#Combine probe data and light data and graph comparing the two
+
+#Use multiple sensors so we don't accidentally use a bad sensor
+
+#
+
+
+
+
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r upload}
+setwd("~/Documents/FALL 2020/INTRO EI/EI_project_data")
+
+
+#Starting at highest elevation and going down the stream
+
+
+#Top of Stream
+#Just below road
+sensor1 <- read_csv('SN20680177.csv')
+
+sensor2 <- read_csv('SN20680166.csv') 
+
+sensor3 <- read_csv('SN20680162.csv') 
+
+sensor4 <- read_csv('SN20883406.csv') 
+
+sensor5 <- read_csv('SN20680180.csv') 
+
+sensor6 <- read_csv('SN20883399.csv') 
+
+sensor7 <- read_csv('SN20680163.csv') 
+
+sensor8 <- read_csv('SN20883398.csv') 
+
+sensor9 <- read_csv('SN20883404.csv') 
+
+sensor10 <- read_csv('SN20883408.csv') 
+
+sensor11 <- read_csv('SN20883413.csv') 
+
+sensor12 <- read_csv('SN20680168.csv')
+
+sensor13 <- read_csv('SN20883405.csv')
+
+sensor14 <- read_csv('SN20883416.csv')
+
+sensor15 <- read_csv('SN20883395.csv')
+
+sensor16 <- read_csv('SN20680171.csv')
+
+sensor17 <- read_csv('SN20680174.csv')
+
+sensor18 <- read_csv('SN20883414.csv')
+
+sensor19 <- read_csv('SN20883419.csv')
+
+sensor20 <- read_csv('SN20883394.csv')
+
+sensor21 <- read_csv('SN20680150.csv')
+
+sensor22 <- read_csv('SN20680165.csv')
+
+
+#Right after mine site.
+sensor23 <- read_csv('SN20680154.csv')
+
+sensor24 <- read_csv('SN20680156.csv')
+
+sensor25 <- read_csv('SN20680155.csv')
+
+sensor26 <- read_csv('SN20680149.csv')
+
+
+mine_comparison <- sensor21 %>% 
+  mutate(month = month(DateTime),
+         day = day(DateTime), 
+         year = year(DateTime), 
+         hour = hour(DateTime)) 
+
+mine_comparison1 <- sensor22 %>% 
+  mutate(month = month(DateTime),
+         day = day(DateTime), 
+         year = year(DateTime), 
+         hour = hour(DateTime))
+
+minecomparison_after <- sensor23 %>% 
+  mutate(month = month(DateTime),
+         day = day(DateTime), 
+         year = year(DateTime), 
+         hour = hour(DateTime)) 
+
+minecomparison_after1 <- sensor24 %>% 
+  mutate(month = month(DateTime),
+         day = day(DateTime), 
+         year = year(DateTime), 
+         hour = hour(DateTime))
+
+
+
+
+
+
+
+mine_comparisonplot <- mine_comparison %>%
+  group_by(hour) %>%
+  summarize(Int_lmft2 = mean(Int_lmft2)) %>% 
+  filter(Int_lmft2 >= 0)
+
+
+mine_comparisonplot1 <- mine_comparison1 %>%
+  group_by(hour) %>%
+  summarize(Int_lmft2 = mean(Int_lmft2)) %>% 
+  filter(Int_lmft2 >= 0)
+
+mine_comparisonplotafter <- minecomparison_after %>%
+  group_by(hour) %>%
+  summarize(Int_lmft2 = mean(Int_lmft2)) %>% 
+  filter(Int_lmft2 >= 0)
+
+
+mine_comparisonplotafter2 <- minecomparison_after1 %>%
+  group_by(hour) %>%
+  summarize(Int_lmft2 = mean(Int_lmft2)) %>% 
+  filter(Int_lmft2 >= 0)
+
+#plotting 2 sensors before mine and 2 after by hourly avg
+
+plot_mine <- ggplot(mine_comparisonplot, aes(x = hour, y = Int_lmft2))+
+  geom_point()+ 
+  labs(x = 'Hour' , y = 'Light Intensity(lum/ft2)', title = 'Sensor 21 Avg Light Intensity by Hour 
+       of the Day')
+plot_mine
+
+plot_mine1 <- ggplot(mine_comparisonplot1, aes(x = hour, y = Int_lmft2))+
+  geom_point()+ 
+  labs(x = 'Hour' , y = 'Light Intensity(lum/ft2)', title = 'Sensor 22 Avg Light Intensity by Hour 
+       of the Day')
+plot_mine1
+
+after_mine1 <- ggplot(mine_comparisonplotafter, aes(x = hour, y = Int_lmft2))+
+  geom_point()+ 
+  labs(x = 'Hour' , y = 'Light Intensity(lum/ft2)', title = 'Sensor 23 Avg Light Intensity by Hour 
+       of the Day')
+after_mine1
+
+after_mine2 <- ggplot(mine_comparisonplotafter2, aes(x = hour, y = Int_lmft2))+
+  geom_point() +
+  labs(x = 'Hour' , y = 'Light Intensity(lum/ft2)', title = 'Sensor 24 Avg Light Intensity by Hour 
+       of the Day')
+
+(plot_mine + plot_mine1) / (after_mine2 + after_mine1)
+
+
+#install.packages('patchwork')
+library(patchwork)
+
+
+#plot_layout
+
+#ten minute data, show actual data from specific days
+
+#look at days that rain
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r boxplot, echo=FALSE}
+#BOXPLOT
+
+
+
+
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
