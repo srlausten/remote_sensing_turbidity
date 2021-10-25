@@ -1,4 +1,4 @@
-# EI_project 
+# McDonald's Hollow Remote Sensing - Light and Turbidty Cross-analysis
 
 ### Scope
 The goal of this research is to analyze the McDonald Hollow stream using remote sensors. These sensors store light and temperature data. In particular we will focus on the mine site that neighbors the stream, the first sensor that precedes the mine site is sensor 23; 26 out of the 33 sensors are utilized in our analysis. 
