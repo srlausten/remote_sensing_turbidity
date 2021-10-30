@@ -1,4 +1,4 @@
-# McDonald's Hollow Remote Sensing - Light and Turbidty Cross-analysis
+# McDonald's Hollow Remote Sensing Research Project - Light and Turbidty Correlation Analysis 
 
 ### Scope
 
